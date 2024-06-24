@@ -1,0 +1,99 @@
+{
+    "key": "my-app",
+    "name": "AI Prediction",
+    "description": "AI prediction for story points, labels and priority",
+    "baseUrl": "{{localBaseUrl}}",
+    "authentication": {
+        "type": "jwt"
+    },
+    "lifecycle": {
+        "installed": "/installed"
+    },
+    "scopes": [
+        "READ"
+    ],
+    "apiMigrations":{
+        "signed-install": true
+    },
+    "modules": {
+        "generalPages": [
+            {
+                "key": "hello-world-page-jira",
+                "location": "system.top.navigation.bar",
+                "name": {
+                    "value": "Hello World"
+                },
+                "url": "/hello-world",
+                "conditions": [{
+                    "condition": "user_is_logged_in"
+                }]
+            },
+        
+            {
+                "key": "hello-world-page-confluence",
+                "location": "system.header/left",
+                "name": {
+                    "value": "Hello World"
+                },
+                "url": "/hello-world",
+                "conditions": [{
+                    "condition": "user_is_logged_in"
+                }]
+            }
+        ],
+        
+        "jiraIssueContexts": [
+          {
+              "icon": {
+                  "width": 23,
+                  "height": 23,
+                  "url": "http://localhost:8000/icon/icons8-clock.svg"
+              },
+              "content": {
+                  "type": "label",
+                  "label": {
+                      "value": "AI Prediction"
+                  }
+              },
+              "target": {
+                  "type": "web_panel",
+                   "url": "/spEstimate?issueKey=${issue.key}&projectId=${project.id}"
+              },
+              "jiraNativeAppsEnabled": true,
+              "name": {
+                  "value": "AI Prediction"
+              },
+              "key": "my-issue-context-panel"
+          }
+      ],
+      "jiraProjectPages": [
+        {
+            "url": "/projectAnalysis?projectKey=${project.key}",
+            "iconUrl": "http://localhost:8000/icon/file-chart.svg",
+            "weight": 1,
+            "name": {
+                "value": "Project Analysis"
+            },
+            "key": "projectAnalysis"
+        },
+        {
+            "url": "/changelog?issueID=${issueID}",
+            "iconUrl": "http://localhost:8000/icon/file-chart.svg",
+            "weight": 1,
+            "name": {
+                "value": "Changelog"
+            },
+            "key": "changelog"
+        },
+        {
+            "url": "/AIAnalysis?projectId=${project.id}",
+            "iconUrl": "http://localhost:8000/icon/file-chart.svg",
+            "weight": 1,
+            "name": {
+                "value": "AIAnalysis"
+            },
+            "key": "AIAnalysis"
+        }
+    ]
+    }
+}
